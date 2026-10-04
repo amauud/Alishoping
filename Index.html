@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ali Shopping Center</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#f6f6f6;
+  color:#222;
+}
+
+header{
+  background:#111827;
+  color:white;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#f59e0b;
+}
+
+.cart{
+  background:#f59e0b;
+  color:#111;
+  border:none;
+  padding:10px 18px;
+  border-radius:25px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hero{
+  background:linear-gradient(135deg,#111827,#374151);
+  color:white;
+  text-align:center;
+  padding:65px 20px;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+.hero p{
+  font-size:19px;
+  margin-bottom:25px;
+}
+
+.shop-btn{
+  background:#f59e0b;
+  border:none;
+  padding:13px 30px;
+  border-radius:25px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.search{
+  padding:25px 5%;
+  text-align:center;
+  background:white;
+}
+
+.search input{
+  width:90%;
+  max-width:600px;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:25px;
+  font-size:16px;
+}
+
+.categories{
+  padding:35px 5%;
+}
+
+.categories h2,
+.products h2{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:28px;
+}
+
+.category-boxes{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.category{
+  background:white;
+  padding:18px 25px;
+  border-radius:12px;
+  box-shadow:0 3px 12px #0001;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.products{
+  padding:20px 5% 50px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:20px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 4px 15px #0001;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+}
+
+.product-img{
+  height:210px;
+  background:linear-gradient(135deg,#e5e7eb,#f9fafb);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+}
+
+.product-info{
+  padding:18px;
+  text-align:center;
+}
+
+.product-info h3{
+  margin-bottom:8px;
+}
+
+.price{
+  color:#e67e00;
+  font-size:20px;
+  font-weight:bold;
+  margin:8px;
+}
+
+.add{
+  background:#111827;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#25D366;
+  color:white;
+  padding:14px 20px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 4px 15px #0003;
+  z-index:10;
+}
+
+footer{
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+}
+
+footer h2{
+  margin-bottom:10px;
+  color:#f59e0b;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:30px;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Ali <span>Shopping Center</span></div>
+  <button class="cart" onclick="showCart()">🛒 کارٹ (<span id="cartCount">0</span>)</button>
+</header>
+
+<section class="hero">
+  <h1>Ali Shopping Center</h1>
+  <p>جینٹس، خواتین اور بچوں کی بہترین کلیکشن</p>
+  <button class="shop-btn" onclick="document.getElementById('products').scrollIntoView()">ابھی خریداری کریں</button>
+</section>
+
+<section class="search">
+  <input type="text" id="search" placeholder="🔎 پروڈکٹ تلاش کریں..." onkeyup="searchProducts()">
+</section>
+
+<section class="categories">
+  <h2>کٹیگریز</h2>
+
+  <div class="category-boxes">
+    <div class="category">👔 جینٹس کلیکشن</div>
+    <div class="category">👗 خواتین کی کلیکشن</div>
+    <div class="category">👠 خواتین کے جوتے</div>
+    <div class="category">👶 بچوں کی کلیکشن</div>
+    <div class="category">👜 بیگز</div>
+    <div class="category">⌚ ایکسیسریز</div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <h2>ہماری پروڈکٹس</h2>
+
+  <div class="product-grid" id="productGrid">
+
+    <div class="product" data-name="جینٹس سوٹ">
+      <div class="product-img">👔</div>
+      <div class="product-info">
+        <h3>جینٹس سوٹ</h3>
+        <div class="price">Rs. 4,999</div>
+        <button class="add" onclick="addCart('جینٹس سوٹ')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="مردانہ شلوار قمیض">
+      <div class="product-img">🥻</div>
+      <div class="product-info">
+        <h3>مردانہ شلوار قمیض</h3>
+        <div class="price">Rs. 2,999</div>
+        <button class="add" onclick="addCart('مردانہ شلوار قمیض')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="خواتین کا سوٹ">
+      <div class="product-img">👗</div>
+      <div class="product-info">
+        <h3>خواتین کا سوٹ</h3>
+        <div class="price">Rs. 3,499</div>
+        <button class="add" onclick="addCart('خواتین کا سوٹ')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="خواتین کے جوتے">
+      <div class="product-img">👠</div>
+      <div class="product-info">
+        <h3>خواتین کے جوتے</h3>
+        <div class="price">Rs. 2,499</div>
+        <button class="add" onclick="addCart('خواتین کے جوتے')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="خواتین کا ہینڈ بیگ">
+      <div class="product-img">👜</div>
+      <div class="product-info">
+        <h3>خواتین کا ہینڈ بیگ</h3>
+        <div class="price">Rs. 1,999</div>
+        <button class="add" onclick="addCart('خواتین کا ہینڈ بیگ')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="بچوں کا لباس">
+      <div class="product-img">👶</div>
+      <div class="product-info">
+        <h3>بچوں کا لباس</h3>
+        <div class="price">Rs. 1,799</div>
+        <button class="add" onclick="addCart('بچوں کا لباس')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="خواتین کی سینڈل">
+      <div class="product-img">👡</div>
+      <div class="product-info">
+        <h3>خواتین کی سینڈل</h3>
+        <div class="price">Rs. 1,899</div>
+        <button class="add" onclick="addCart('خواتین کی سینڈل')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="واچ">
+      <div class="product-img">⌚</div>
+      <div class="product-info">
+        <h3>خوبصورت واچ</h3>
+        <div class="price">Rs. 2,299</div>
+        <button class="add" onclick="addCart('خوبصورت واچ')">کارٹ میں شامل کریں</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<a class="whatsapp" href="https://wa.me/923067835296" target="_blank">
+  💬 WhatsApp پر رابطہ
+</a>
+
+<footer>
+  <h2>Ali Shopping Center</h2>
+  <p>جینٹس • خواتین • بچوں کی کلیکشن</p>
+  <p>📞 0306-7835296</p>
+  <br>
+  <p>© 2026 Ali Shopping Center — All Rights Reserved</p>
+</footer>
+
+<script>
+let cart = [];
+
+function addCart(product){
+  cart.push(product);
+  document.getElementById("cartCount").innerText = cart.length;
+  alert(product + " کارٹ میں شامل کر دیا گیا ہے۔");
+}
+
+function showCart(){
+  if(cart.length === 0){
+    alert("آپ کی کارٹ ابھی خالی ہے۔");
+  }else{
+    alert("آپ کی کارٹ میں:\n\n" + cart.join("\n"));
+  }
+}
+
+function searchProducts(){
+  let value = document.getElementById("search").value.toLowerCase();
+  let products = document.querySelectorAll(".product");
+
+  products.forEach(function(product){
+    let name = product.getAttribute("data-name").toLowerCase();
+
+    if(name.includes(value)){
+      product.style.display = "block";
+    }else{
+      product.style.display = "none";
+    }
+  });
+}
+</script>
+
+</body>
+  </html>
